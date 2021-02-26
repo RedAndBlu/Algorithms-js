@@ -1,4 +1,4 @@
-class DoublyLinkedList {
+export default class DoublyLinkedList {
   constructor() {
     this._sentinel = new Node(null);
     this._size = 0;
