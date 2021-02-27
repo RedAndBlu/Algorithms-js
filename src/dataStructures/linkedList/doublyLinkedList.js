@@ -53,7 +53,8 @@ export default class DoublyLinkedList {
   }
 
   valueAt(index) {
-    if (this.size > index) return this._getNodeAt(index).value;
+    const node = this._getNodeAt(index);
+    if (node) return node.value;
   }
 
   delete(value) {
@@ -62,9 +63,8 @@ export default class DoublyLinkedList {
   }
 
   deleteAt(index) {
-    if (this.size > index) {
-      this._deleteNode(this._getNodeAt(index));
-    }
+    const node = this._getNodeAt(index);
+    if (node) this._deleteNode(node);
   }
 
   reverse() {
@@ -111,7 +111,7 @@ export default class DoublyLinkedList {
   }
 
   _getNodeAtFromFront(index) {
-    if (this.size > index) {
+    if (index >= 0 && index < this.size) {
       let n = this._sentinel.next;
       for (let i = 0; i !== index; i++, n = n.next);
 
@@ -120,7 +120,7 @@ export default class DoublyLinkedList {
   }
 
   _getNodeAtFromEnd(index) {
-    if (this.size > index) {
+    if (index >= 0 && index < this.size) {
       let n = this._sentinel.prev;
       for (let i = 0; i !== index; i++, n = n.prev);
 

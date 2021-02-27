@@ -99,6 +99,14 @@ describe("doublyLinkedList", function () {
       chai.assert.isUndefined(new DoublyLinkedList().valueAt(3));
     });
 
+    it("should get undefined when the index is langer than size", function () {
+      chai.assert.isUndefined(list.valueAt(5));
+    });
+
+    it("should get undefined when the index is less than 0", function () {
+      chai.assert.isUndefined(list.valueAt(-1));
+    });
+
     it("should get the element at the given index", function () {
       chai.assert.equal(list.valueAt(2), 3);
     });
@@ -164,8 +172,14 @@ describe("doublyLinkedList", function () {
       chai.assert.notInclude([...list], 2);
     });
 
-    it("should not mutate the list when the index doesn't exist", function() {
+    it("should not mutate the list when the index larger than size", function() {
       list.deleteAt(5);
+      chai.assert.equal(list.size, 4);
+      chai.assert.deepEqual([...list], [1, 2, 3, 4]);
+    });
+
+    it("should not mutate the list when the index less than 0", function() {
+      list.deleteAt(-1);
       chai.assert.equal(list.size, 4);
       chai.assert.deepEqual([...list], [1, 2, 3, 4]);
     });
