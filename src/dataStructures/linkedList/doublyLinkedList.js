@@ -43,11 +43,13 @@ export default class DoublyLinkedList {
   }
 
   front() {
-    return this._sentinel.next.value;
+    if (this.size > 0)
+      return this._sentinel.next.value;
   }
 
   back() {
-    return this._sentinel.prev.value;
+    if (this.size > 0)
+      return this._sentinel.prev.value;
   }
 
   valueAt(index) {
