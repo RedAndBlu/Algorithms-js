@@ -1,6 +1,6 @@
 export default class CircularQueue {
   constructor(capacity = 5) {
-    this._capacity = capacity + 1;
+    this._capacity = capacity + 1;              // only (capacity - 1) is actually writable, so one extra space is needed
     this._store = new Array(this._capacity);
     this._write = 0;
     this._read = 0;
@@ -16,7 +16,7 @@ export default class CircularQueue {
   }
 
   isFull() {
-    return this._read - this._incrementByOne(this._write) === 0;    // full when the write is one behind read
+    return this._read === this._incrementByOne(this._write);    // full when the write index is one behind read
   }
 
   enqueue(value) {
