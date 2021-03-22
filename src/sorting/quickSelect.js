@@ -9,15 +9,13 @@ export default function quickSort(arr, idx, compare) {
   if (idx < 0 || idx >= arr.length) return;
   let lo = 0, hi = arr.length - 1;
 
-  while (lo < hi) {
+  while (lo <= hi) {
     const k = partition(arr, lo, hi, compare);
 
     if (k < idx) lo = k + 1;
     else if (k > idx) hi = k - 1;
     else return arr[k];
   }
-
-  return arr[idx];
 }
 
 function partition(arr, lo, hi, cmp) {
