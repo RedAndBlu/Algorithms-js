@@ -100,4 +100,23 @@ describe("CircularQueue", function() {
       chai.assert.isTrue(queue.isEmpty());
     });
   });
+
+  describe("method overenqueue(value)", function() {
+    it("should add normally when it isn't full", function() {
+      const newQueue = new CircularQueue().overenqueue(10);
+      chai.assert.equal(newQueue.dequeue(), 10);
+      chai.assert.isTrue(newQueue.isEmpty());
+    });
+
+    it("should overwrite the oldest element when it's full", function() {
+      const newQueue = new CircularQueue(5)
+        .overenqueue(1)
+        .overenqueue(2)
+        .overenqueue(3)
+        .overenqueue(4)
+        .overenqueue(5)
+        .overenqueue(6);
+      chai.assert.deepEqual([...newQueue], [2, 3, 4, 5, 6]);
+    });
+  });
 });

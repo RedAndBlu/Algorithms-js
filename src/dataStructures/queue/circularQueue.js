@@ -19,6 +19,9 @@ export default class CircularQueue {
     return this._read === this._incrementByOne(this._write);    // full when the write index is one behind read
   }
 
+  // add the value to the queue if is not full
+  // @param value
+  // @return {CircularQueue} - this
   enqueue(value) {
     if (this.isFull())
       throw new Error("Error can't add an element to a full queue");
@@ -28,6 +31,21 @@ export default class CircularQueue {
     return this;
   }
 
+  // add the value to the queue and if it's full overwrite the oldest value
+  // @param value
+  // @return {CircularQueue} - this
+  overenqueue(value) {
+    if (this.isFull()) {
+      this._store[this._write] = value;
+      this._write = this._incrementByOne(this._write);
+      this._read = this._incrementByOne(this._read);
+    }
+    else this.enqueue(value);
+
+    return this;
+  }
+
+  // @return return the firt element in the que
   dequeue() {
     if (this.isEmpty())
       throw new Error("Error can't get an element from a empty queue");
